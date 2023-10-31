@@ -4,7 +4,7 @@ from sqlalchemy_serializer import SerializerMixin
 db = SQLAlchemy()
 
 class Movie(db.Model, SerializerMixin):
-    __tablename__ = 'Movies'
+    __tablename__ = 'movies'
 
     serialize_rules = ('-ratings.movie',)
 

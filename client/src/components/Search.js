@@ -1,7 +1,7 @@
 function Search({ searchTerm, onSearchChange }) {
   return (
     <div className="searchbar">
-      <label htmlFor="search">Search Plants:</label>
+      <label htmlFor="search">Search Movies:</label>
       <input
         type="text"
         id="search"

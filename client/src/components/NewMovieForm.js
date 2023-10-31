@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-function NewPlantForm({ onAddPlant }) {
+function NewMovieForm({ onAddMovie }) {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("/plants", {
+    fetch("/Movies", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -19,20 +19,22 @@ function NewPlantForm({ onAddPlant }) {
       }),
     })
       .then((r) => r.json())
-      .then((newPlant) => onAddPlant(newPlant));
+      .then((newMovie) => onAddMovie(newMovie));
   }
 
   return (
-    <div className="new-plant-form">
-      <h2>New Plant</h2>
+    <div className="new-Movie-form">
+      <h2>New Movie</h2>
+      <br/>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="name"
-          placeholder="Plant name"
+          placeholder="Movie name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+        <br/>
         <input
           type="text"
           name="image"
@@ -40,6 +42,7 @@ function NewPlantForm({ onAddPlant }) {
           value={image}
           onChange={(e) => setImage(e.target.value)}
         />
+        <br/>
         <input
           type="number"
           name="price"
@@ -48,10 +51,11 @@ function NewPlantForm({ onAddPlant }) {
           value={price}
           onChange={(e) => setPrice(parseFloat(e.target.value))}
         />
-        <button type="submit">Add Plant</button>
+        <br/>
+        <button type="submit">Add Movie</button>
       </form>
     </div>
   );
 }
 
-export default NewPlantForm;
+export default NewMovieForm;

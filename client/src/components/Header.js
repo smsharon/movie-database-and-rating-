@@ -2,9 +2,9 @@ function Header() {
   return (
     <header>
       <h1>
-        Plantsy
+        Movies
         <span className="logo" role="img">
-          🌱
+        🎬🍿🎞️
         </span>
       </h1>
     </header>

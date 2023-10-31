@@ -1,41 +1,41 @@
 import { useState } from "react";
 
-function PlantCard({ plant, handleUpdatePlant, handleDeletePlant  }) {
-  const { id, name, image, price, is_in_stock } = plant;
+function MovieCard({ Movie, handleUpdateMovie, handleDeleteMovie  }) {
+  const { id, name, image, price, is_in_stock } = Movie;
   const [updatedPrice, setUpdatedPrice] = useState(price)
 
 
   const handleClick = () => {
-    const updatedPlant = {...plant, is_in_stock: !is_in_stock}
-    handleUpdate(updatedPlant)
+    const updatedMovie = {...Movie, is_in_stock: !is_in_stock}
+    handleUpdate(updatedMovie)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedPlant = {...plant, price: e.target.price.value}
-    handleUpdate(updatedPlant)
+    const updatedMovie = {...Movie, price: e.target.price.value}
+    handleUpdate(updatedMovie)
   }
 
-  const handleUpdate = async (updatedPlant) => {
-    const response = await fetch(`/plants/${id}`, {
+  const handleUpdate = async (updatedMovie) => {
+    const response = await fetch(`/Movies/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedPlant),
+      body: JSON.stringify(updatedMovie),
     })
     const data = await response.json();
-    handleUpdatePlant(data)
+    handleUpdateMovie(data)
 
   }
 
   const handleDeleteClick = async () => {
 
-      const response = await fetch(`/plants/${id}`, {
+      const response = await fetch(`/Movies/${id}`, {
       method: "DELETE",
     });
       if (response.ok) {
-        handleDeletePlant(id);
+        handleDeleteMovie(id);
         alert("Deleted Successfully 🌼")
       }
   }
@@ -68,4 +68,4 @@ function PlantCard({ plant, handleUpdatePlant, handleDeletePlant  }) {
   );
 }
 
-export default PlantCard;
+export default MovieCard;

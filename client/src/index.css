@@ -6,6 +6,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: wheat;
 }
 
 body {
@@ -51,23 +52,23 @@ main {
   padding: 0 1rem;
 }
 
-.new-plant-form {
+.new-Movie-form {
   padding: 2rem 1rem;
   margin: 2rem 0;
   background-color: rgba(181, 250, 181, 0.5);
 }
 
-.new-plant-form form {
+.new-Movie-form form {
   display: flex;
   justify-content: center;
 }
 
-.new-plant-form input {
+.new-Movie-form input {
   margin-right: 2rem;
   flex: 1;
 }
 
-.new-plant-form button {
+.new-Movie-form button {
   width: 150px;
 }
 

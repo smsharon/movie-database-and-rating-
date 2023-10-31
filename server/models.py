@@ -11,12 +11,28 @@ class Movie(db.Model, SerializerMixin):
     image = db.Column(db.String)
     release_date = db.Column(db.Date)
     description = db.Column(db.Text)
+
+    #a many-to-many relationship with genres
+    genres = db.relationship('Genre', secondary='movie_genre_association', backref='movies')
+    #a one-to-many relationship with ratings
+    ratings = db.relationship('Rating', backref='movie')
+
+
     
 class Genre(db.Model, SerializerMixin):
     __tablename__ = 'genres'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True)
+
+     #a many-to-many relationship with movies
+    movies = db.relationship('Movie', secondary='movie_genre_association', backref='genres')
+
+class MovieGenreAssociation(db.Model):
+    __tablename__ = 'movie_genre_association'
+
+    movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'), primary_key=True)
+    genre_id = db.Column(db.Integer, db.ForeignKey('genres.id'), primary_key=True)    
 
 class Rating(db.Model, SerializerMixin):
     __tablename__ = 'ratings'
@@ -35,6 +51,9 @@ class User(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True)
     email = db.Column(db.String, unique=True)
-    password = db.Column(db.String)    
+    password = db.Column(db.String)   
+
+    #one-to-many relationship with ratings
+    ratings = db.relationship('Rating', backref='user') 
 
     

@@ -15,7 +15,8 @@ class Movie(db.Model, SerializerMixin):
     description = db.Column(db.Text)
 
     #a many-to-many relationship with genres
-    genres = db.relationship('Genre', secondary='movie_genre_association', backref='movies')
+    genres = db.relationship('Genre', secondary='movie_genre_association', back_populates='movies')
+
     #a one-to-many relationship with ratings
     ratings = db.relationship('Rating', backref='movie')
 
@@ -28,7 +29,7 @@ class Genre(db.Model, SerializerMixin):
     name = db.Column(db.String, unique=True)
 
      #a many-to-many relationship with movies
-    movies = db.relationship('Movie', secondary='movie_genre_association', backref='genres')
+    movies = db.relationship('Movie', secondary='movie_genre_association', back_populates='genres')
 
 class MovieGenreAssociation(db.Model):
     __tablename__ = 'movie_genre_association'

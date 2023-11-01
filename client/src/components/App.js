@@ -1,11 +1,11 @@
-import Header from "./Header";
-import MoviePage from "./MoviePage";
+import Home from "./Home";
+//import MoviePage from "./MoviePage";
 
 function App() {
   return (
     <div className="app">
-      <Header />
-      <MoviePage />
+      <Home />
+      
     </div>
   );
 }

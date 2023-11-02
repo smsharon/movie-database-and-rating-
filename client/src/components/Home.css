@@ -237,4 +237,45 @@ h2 {
 .next-page-button:hover {
   background-color: #0056b3;
 }
+.rate-and-review-section {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.rating-container {
+  margin-top: 16px;
+}
+
+.star {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.star.selected {
+  color: gold;
+}
+
+.review-textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.submit-button {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 16px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
 

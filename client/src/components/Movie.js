@@ -10,6 +10,7 @@ const Movie = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedMovie, setSelectedMovie] = useState(null);
   
+  
 
   useEffect(() => {
     // Fetch movies from your API
@@ -66,7 +67,7 @@ const Movie = () => {
           <ul>
             <li>Home</li>
             <li>Movies</li>
-            <li>Genres</li>
+            <li>Add Movies</li>
             <li>User Profile</li>
           </ul>
         </nav>
@@ -120,9 +121,7 @@ const Movie = () => {
         ))}
       </div>
 
-      {/* Next Page button */}
-      <button className="next-page-button">Next Page</button>
-
+      
       {/* Detailed Movie Page */}
       {selectedMovie && (
         <div className="detailed-movie-page">
@@ -131,8 +130,9 @@ const Movie = () => {
           <h2>{selectedMovie.name}</h2>
           <p>Release Date: {selectedMovie.release_date}</p>
           <p>Description: {selectedMovie.description}</p>
-          <p>Genres: {selectedMovie.genres.join(', ')}</p>
-          <p>User Ratings: {selectedMovie.ratings.map(rating => rating.stars + ' (' + rating.user + ')').join(', ')}</p>
+          <p>Genres: {selectedMovie.genres.map(genre => genre.name).join(', ')}</p>
+          <p>User Ratings: {selectedMovie.ratings.map(rating => rating.rating + ' (' + rating.user.username + ')').join(', ')}</p>
+
         </div>
       )}
 

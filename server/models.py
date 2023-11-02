@@ -6,7 +6,7 @@ db = SQLAlchemy()
 class Movie(db.Model, SerializerMixin):
     __tablename__ = 'movies'
 
-    serialize_rules = ('-ratings.movie',)
+    serialize_rules = ('-ratings.movie.ratings', '-genres.movies')
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
@@ -40,7 +40,7 @@ class MovieGenreAssociation(db.Model):
 class Rating(db.Model, SerializerMixin):
     __tablename__ = 'ratings'
 
-    serialize_rules = ('-movie.ratings','-user.ratings',)
+    serialize_rules = ('-movie.ratings.user.ratings', '-user.ratings')
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'), nullable=False)
@@ -52,7 +52,7 @@ class Rating(db.Model, SerializerMixin):
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
     
-    serialize_rules = ('-ratings.user',)
+    serialize_rules = ('-ratings.user.ratings', '-user.ratings')
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True)
     email = db.Column(db.String, unique=True)

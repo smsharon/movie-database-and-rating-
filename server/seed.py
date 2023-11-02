@@ -31,8 +31,58 @@ with app.app_context():
         release_date= datetime(2023, 2, 15),
         description= "This is the description of Movie 2."
     )
+    equalizer = Movie(
+        id=3,
+        name="equalizer",
+        image="./images/equalizer.jpeg",
+        release_date= datetime(2023, 3, 16),
+        description= "This is the description of Movie 3."
+    )
+    halloween = Movie(
+        id=4,
+        name="halloween",
+        image="./images/halloween.jpeg",
+        release_date= datetime(2023, 4, 17),
+        description= "This is the description of Movie 4."
+    )
+    scary = Movie(
+        id=5,
+        name="scary",
+        image="./images/scary.jpeg",
+        release_date= datetime(2023, 5, 18),
+        description= "This is the description of Movie 5."
+    )
+    persian = Movie(
+        id=6,
+        name="persian",
+        image="./images/persian.jpeg",
+        release_date= datetime(2023, 6, 18),
+        description= "This is the description of Movie 6."
+    )
+    mario = Movie(
+        id=7,
+        name="mario",
+        image="./images/mario.jpeg",
+        release_date= datetime(2023, 7, 19),
+        description= "This is the description of Movie 7."
+    )
+    killer = Movie(
+        id=8,
+        name="killer",
+        image="./images/killer.jpeg",
+        release_date= datetime(2023, 8, 20),
+        description= "This is the description of Movie 8."
+    )
+    teen = Movie(
+        id=9,
+        name="teen",
+        image="./images/teen.jpeg",
+        release_date= datetime(2023, 9, 21),
+        description= "This is the description of Movie 9."
+    )
+    
 
-    db.session.add_all([hocus, animal])
+    db.session.add_all([hocus, animal, equalizer, scary, persian, mario, killer, teen])
 
     # Add rating records
     user1 = User(

@@ -32,10 +32,10 @@ const Home = () => {
       <header>
         <nav>
           <ul>
-            <li>Home</li>
-            <li>Movies</li>
-            <li>Genres</li>
-            <li>User Profile</li>
+          <li><a href="http://localhost:3000">Home</a></li>
+         <li><a href="movies.html">Movies</a></li>
+          <li><a href="genres.html">Genres</a></li>
+           <li><a href="profile.html">User Profile</a></li>
           </ul>
         </nav>
       </header>

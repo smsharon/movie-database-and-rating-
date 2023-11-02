@@ -72,22 +72,34 @@ with app.app_context():
     db.session.add_all([user1, user2])
 
     rating1 = Rating(
-        id=1,
-        user_id=1,
-        movie_id=1,
+        user_id=user1.id,
+        movie_id=hocus.id,
         rating=4,
         review="Good movie."
     )
 
     rating2 = Rating(
-        id=2,
-        user_id=2,
-        movie_id=1,
+        user_id=user2.id,
+        movie_id=hocus.id,
         rating=5,
         review="Excellent movie."
     )
 
-    db.session.add_all([rating1, rating2])
+    rating3 = Rating(
+        user_id=user1.id,
+        movie_id=animal.id,
+        rating=4,
+        review="Good movie."
+    )
+
+    rating4 = Rating(
+        user_id=user2.id,
+        movie_id=animal.id,
+        rating=5,
+        review="Excellent movie."
+    )
+
+    db.session.add_all([rating1, rating2, rating3, rating4])
 
     
    

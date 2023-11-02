@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
+import RateAndReviewSection from './RateAndReviewSection';
 
 const Movie = () => {
   const [movies, setMovies] = useState([]);
@@ -8,6 +9,7 @@ const Movie = () => {
   const [sortOption, setSortOption] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedMovie, setSelectedMovie] = useState(null);
+  
 
   useEffect(() => {
     // Fetch movies from your API
@@ -34,16 +36,27 @@ const Movie = () => {
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
-
+  
   const handleSearch = () => {
     // Perform a search based on 'searchQuery'
     const searchResults = movies.filter((movie) =>
-      movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+      movie.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
   
     // Update 'movies' with the search results
     setMovies(searchResults);
   };
+
+  const sortedMovies = movies.slice(); // Create a copy of the movies array
+
+  if (sortOption === 'name') {
+    sortedMovies.sort((a, b) => a.name.localeCompare(b.name));
+    console.log(sortedMovies);
+  } else if (sortOption === 'release_date') {
+    sortedMovies.sort((a, b) => new Date(a.release_date) - new Date(b.release_date));
+  } else if (sortOption === 'rating') {
+    sortedMovies.sort((a, b) => b.rating - a.rating);
+  }
   
 
   return (
@@ -77,7 +90,7 @@ const Movie = () => {
           Sort by:
           <select value={sortOption} onChange={handleSortChange}>
             <option value="">Default</option>
-            <option value="title">Title</option>
+            <option value="name">Title</option>
             <option value="release_date">Release Date</option>
             <option value="rating">Rating</option>
           </select>
@@ -94,7 +107,7 @@ const Movie = () => {
       </div>
 
       <div className="thumbnails">
-        {movies.map((movie) => (
+        {sortedMovies.map((movie) => (
           <div
             key={movie.id}
             className="movie-thumbnail"
@@ -124,12 +137,9 @@ const Movie = () => {
       )}
 
       {/* Rate and Review Section */}
-      <div className="rate-and-review-section">
-        <h3>Rate and Review Section</h3>
-        <div>Your Rating: [Star Rating]</div>
-        <div>Your Review: [Text Input]</div>
-        <button>Submit</button>
-      </div>
+      {selectedMovie && (
+        <RateAndReviewSection movie={selectedMovie} />
+      )}
     </div>
   );
 };

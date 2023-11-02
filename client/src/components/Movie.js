@@ -67,7 +67,7 @@ const Movie = () => {
           <ul>
             <li>Home</li>
             <li>Movies</li>
-            <li>Genres</li>
+            <li>Add Movies</li>
             <li>User Profile</li>
           </ul>
         </nav>

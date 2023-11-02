@@ -15,6 +15,20 @@ with app.app_context():
     db.session.query(MovieGenreAssociation).delete()
 
 
+    # Add genre records
+    action = Genre(
+        name="Action"
+    )
+
+    comedy = Genre(
+        name="Comedy"
+    )
+
+    db.session.add_all([action, comedy])
+    db.session.commit()
+
+
+
     #add movie records
     hocus = Movie(
         id=1,
@@ -33,6 +47,12 @@ with app.app_context():
     )
 
     db.session.add_all([hocus, animal])
+
+    # Associate genres with the movies
+    hocus.genres.append(action)
+    hocus.genres.append(comedy)
+
+    animal.genres.append(action)
 
     # Add rating records
     user1 = User(
@@ -69,25 +89,7 @@ with app.app_context():
 
     db.session.add_all([rating1, rating2])
 
-    # Add genre records
-    action = Genre(
-        id=1,
-        name="Action"
-    )
-
-    comedy = Genre(
-        id=2,
-        name="Comedy"
-    )
-
-    db.session.add_all([action, comedy])
-
-   # Create associations
-    ##association1 = MovieGenreAssociation(movie=hocus, genre=action)
-    #association2 = MovieGenreAssociation(movie=hocus, genre=comedy)
-    #association3 = MovieGenreAssociation(movie=animal, genre=comedy)
-
-    #db.session.add_all([association1, association2, association3])
-
+    
+   
 
     db.session.commit()

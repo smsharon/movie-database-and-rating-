@@ -144,14 +144,16 @@ header {
 
 nav {
   display: flex;
-  justify-content: space-around;
-  list-style: none;
-  padding: 0;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  border-radius: 4px;
 }
 
 nav li {
-  margin-right: 20px;
+  padding: 10px 120px;
   font-weight: bold;
+  font-size: 20px;
 }
 
 h2 {

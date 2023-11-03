@@ -1,0 +1,95 @@
+.Container{
+    display: flex;
+    flex-direction: column;
+    /* margin: 10px; */
+    align-items: center;
+    margin-top: 200px;
+    background: #fff;
+    padding-bottom: 30px;
+}
+
+.text{
+   font-size: 40px;
+   display: flex;
+   justify-content: center;
+}
+
+.underline {
+    width: 100%;
+    height: 7px;
+    border-radius: 10px;
+    background-color: black;
+}
+
+.inputs {
+    margin-top: 45px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input{
+    display: flex;
+    align-items: center;
+    margin: 2px;
+    width: 98%;
+    height: 90%;
+    background-color: black;
+    border-radius: 8px;
+}
+
+.Submit-container{
+    display: flex;
+    justify-content: center;
+    gap: 40%;
+    margin: 60px auto;
+}
+
+.Submit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 240px;
+    height: 60px;
+    color: #fff;
+    background-color: grey;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+ 
+.submit-active{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 240px;
+    height: 60px;
+    color: #fff;
+    background-color: grey;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+.submit-inactive {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 240px;
+    height: 60px;
+    color: #fff;
+    background-color: grey;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+input{
+    width:98%;
+    height: 90%;
+    margin: 2px;
+}

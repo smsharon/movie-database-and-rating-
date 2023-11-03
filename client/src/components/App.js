@@ -2,29 +2,19 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import Movie from "./Movie";
+import LoginSignup from "./LoginSignup"
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLogin = () => {
-    
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
-
   return (
     <div className="app">
-      
+            
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/movies" element={<Movie />} />
+          <Route path="/movie" element={<Movie />} />
+          <Route path="/login" element={<LoginSignup />} />
         </Routes>
       </Router> 
-      
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [featuredMovies, setFeaturedMovies] = useState([]);
@@ -32,10 +33,14 @@ const Home = () => {
       <header>
         <nav>
           <ul>
-            <li>Home</li>
-            <li>Movies</li>
-            <li>Genres</li>
-            <li>User Profile</li>
+            <li>
+              <Link to="/">Home</Link></li>
+              <li>
+                <Link to="MoviesPage">Movies</Link></li>
+              <li> 
+                <Link to="Genres">Genres</Link></li>
+              <li>
+                <Link to="login">Login-signup</Link></li>
           </ul>
         </nav>
       </header>

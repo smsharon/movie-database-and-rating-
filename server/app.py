@@ -29,7 +29,8 @@ class Movies(Resource):
         new_Movie = Movie(
             name=data['name'],
             image=data['image'],
-            price=data['price'],
+            release_date=data['release_date'],
+            description=data['description'],
         )
 
         db.session.add(new_Movie)

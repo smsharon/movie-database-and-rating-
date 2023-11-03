@@ -3,6 +3,7 @@
 from flask import Flask, jsonify, request, make_response
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
+from datetime import datetime
 
 from models import db, Movie, Rating, User, Genre
 
@@ -25,11 +26,19 @@ class Movies(Resource):
 
     def post(self):
         data = request.get_json()
+        # Handle release_date
+        release_date_str = data.get('release_date')
+        if release_date_str:
+            # Convert the date string to a Python date object
+            release_date = datetime.strptime(release_date_str, '%Y-%m-%d').date()
+        else:
+            release_date = None  # Set to None if no date provided
+
 
         new_Movie = Movie(
             name=data['name'],
             image=data['image'],
-            release_date=data['release_date'],
+            release_date=release_date,
             description=data['description'],
         )
 

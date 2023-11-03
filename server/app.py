@@ -52,14 +52,15 @@ class Login(Resource):
         password = data.get('password')
 
         if not email or not password:
-            return jsonify({'message': 'Email and password are required'}), 400
+            return {'message': 'Email and password are required'}, 400
 
         user = User.query.filter_by(email=email).first()
         if user and check_password_hash(user.password, password):
             token = jwt.encode({'user_id': user.id}, app.config['SECRET_KEY'], algorithm='HS256')
-            return jsonify({'token': token}), 200
+            return {'token': token}, 200
 
         return {'message': 'Invalid credentials'}, 401
+
 
 # Token verification decorator
 def token_required(f):

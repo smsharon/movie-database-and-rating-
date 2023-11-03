@@ -15,8 +15,9 @@ const Navbar = () => {
         <li className="nav-item">
           <Link to="/addMovie">Add Movie</Link>
         </li>
+        
         <li className="nav-item">
-          <Link to="/userProfile">User Profile</Link>
+          <Link to="/login">Login</Link>
         </li>
       </ul>
     </nav>

@@ -4,15 +4,11 @@ from flask import Flask, jsonify, request, make_response
 from models import db, Movie, Rating, User, Genre
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
-from flask_jwt_extended import create_access_token
-from flask_jwt_extended import get_jwt_identity
-from flask_jwt_extended import jwt_required
-from flask_jwt_extended import JWTManager
 from flask import Flask
+from flask_cors import CORS
 
 app = Flask(__name__)
-app.config["JWT_SECRET_KEY"] = "Badger"  
-jwt = JWTManager(app)
+cors = CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Movies.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -22,16 +18,6 @@ migrate = Migrate(app, db)
 db.init_app(app)
 
 api = Api(app)
-
-@app.route("/tokens", methods=["POST"])
-def create_tokens():
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-    if email != "test" or password != "test":
-        return jsonify({"msg": "Bad username or password"}), 401
-
-    access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token)
 
 class Movies(Resource):
 
@@ -45,7 +31,8 @@ class Movies(Resource):
         new_Movie = Movie(
             name=data['name'],
             image=data['image'],
-            price=data['price'],
+            release_date=data['release_date'],
+            description=data['description'],
         )
 
         db.session.add(new_Movie)
@@ -187,4 +174,4 @@ api.add_resource(Genres, '/Genres')
 
 
 if __name__ == '__main__':
-    app.run(port=3000, debug=True)
+    app.run(port=3002, debug=True)

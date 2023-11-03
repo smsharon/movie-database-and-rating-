@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
+import RateAndReviewSection from './RateAndReviewSection';
 
 const Movie = () => {
   const [movies, setMovies] = useState([]);
@@ -8,6 +9,8 @@ const Movie = () => {
   const [sortOption, setSortOption] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedMovie, setSelectedMovie] = useState(null);
+  
+  
 
   useEffect(() => {
     // Fetch movies from your API
@@ -34,30 +37,32 @@ const Movie = () => {
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
-
+  
   const handleSearch = () => {
     // Perform a search based on 'searchQuery'
     const searchResults = movies.filter((movie) =>
-      movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+      movie.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
   
     // Update 'movies' with the search results
     setMovies(searchResults);
   };
+
+  const sortedMovies = movies.slice(); // Create a copy of the movies array
+
+  if (sortOption === 'name') {
+    sortedMovies.sort((a, b) => a.name.localeCompare(b.name));
+    console.log(sortedMovies);
+  } else if (sortOption === 'release_date') {
+    sortedMovies.sort((a, b) => new Date(a.release_date) - new Date(b.release_date));
+  } else if (sortOption === 'rating') {
+    sortedMovies.sort((a, b) => b.rating - a.rating);
+  }
   
 
   return (
     <div className="movies-page">
-      <header>
-        <nav>
-          <ul>
-            <li>Home</li>
-            <li>Movies</li>
-            <li>Genres</li>
-            <li>User Profile</li>
-          </ul>
-        </nav>
-      </header>
+      
 
       <h2>Discover Movies</h2>
 
@@ -77,12 +82,12 @@ const Movie = () => {
           Sort by:
           <select value={sortOption} onChange={handleSortChange}>
             <option value="">Default</option>
-            <option value="title">Title</option>
+            <option value="name">Title</option>
             <option value="release_date">Release Date</option>
             <option value="rating">Rating</option>
           </select>
         </div>
-        <div>
+        <div className='input'>
           <input
             type="text"
             placeholder="Search for movies"
@@ -94,7 +99,7 @@ const Movie = () => {
       </div>
 
       <div className="thumbnails">
-        {movies.map((movie) => (
+        {sortedMovies.map((movie) => (
           <div
             key={movie.id}
             className="movie-thumbnail"
@@ -107,9 +112,7 @@ const Movie = () => {
         ))}
       </div>
 
-      {/* Next Page button */}
-      <button className="next-page-button">Next Page</button>
-
+      
       {/* Detailed Movie Page */}
       {selectedMovie && (
         <div className="detailed-movie-page">
@@ -118,18 +121,16 @@ const Movie = () => {
           <h2>{selectedMovie.name}</h2>
           <p>Release Date: {selectedMovie.release_date}</p>
           <p>Description: {selectedMovie.description}</p>
-          <p>Genres: {selectedMovie.genres.join(', ')}</p>
-          <p>User Ratings: {selectedMovie.ratings.map(rating => rating.stars + ' (' + rating.user + ')').join(', ')}</p>
+          <p>Genres: {selectedMovie.genres.map(genre => genre.name).join(', ')}</p>
+          <p>User Ratings: {selectedMovie.ratings.map(rating => rating.rating + ' (' + rating.user.username + ')').join(', ')}</p>
+
         </div>
       )}
 
       {/* Rate and Review Section */}
-      <div className="rate-and-review-section">
-        <h3>Rate and Review Section</h3>
-        <div>Your Rating: [Star Rating]</div>
-        <div>Your Review: [Text Input]</div>
-        <button>Submit</button>
-      </div>
+      {selectedMovie && (
+        <RateAndReviewSection movie={selectedMovie} />
+      )}
     </div>
   );
 };

@@ -28,7 +28,7 @@ function Login() {
       if (response.status === 200) {
         // Assuming the server returns a JWT token upon successful login
         localStorage.setItem('token', data.token);
-        navigate('/protected'); // Navigate to the protected route
+        navigate('/'); // Navigate to the protected route
       } else {
         setMessage(data.message);
       }

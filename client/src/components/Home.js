@@ -29,16 +29,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      <header>
-        <nav>
-          <ul>
-            <li>Home</li>
-            <li>Movies</li>
-            <li>Add Movies</li>
-            <li>User Profile</li>
-          </ul>
-        </nav>
-      </header>
+      
 
       <div className="welcome-banner">
         <h2>Discover the Best Movies</h2>

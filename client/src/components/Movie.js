@@ -62,16 +62,7 @@ const Movie = () => {
 
   return (
     <div className="movies-page">
-      <header>
-        <nav>
-          <ul>
-            <li>Home</li>
-            <li>Movies</li>
-            <li>Add Movies</li>
-            <li>User Profile</li>
-          </ul>
-        </nav>
-      </header>
+      
 
       <h2>Discover Movies</h2>
 
@@ -96,7 +87,7 @@ const Movie = () => {
             <option value="rating">Rating</option>
           </select>
         </div>
-        <div>
+        <div className='input'>
           <input
             type="text"
             placeholder="Search for movies"

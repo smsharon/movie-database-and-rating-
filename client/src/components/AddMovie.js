@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Home.css';
 
 const AddMovie = () => {
@@ -7,8 +7,22 @@ const AddMovie = () => {
     image: '',
     release_date: '',
     description: '',
-    genres: [], 
+    genres: [],
   });
+
+  const [availableGenres, setAvailableGenres] = useState([]);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    // Fetch available genres from your server and update availableGenres state
+    fetch('/Genres')
+      .then((response) => response.json())
+      .then((data) => {
+        setAvailableGenres(data);
+      })
+      .catch((error) => console.error('Error fetching genres:', error));
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -16,11 +30,12 @@ const AddMovie = () => {
   };
 
   const handleGenreChange = (e) => {
-    const { value } = e.target;
-    const updatedGenres = movie.genres.includes(value)
-      ? movie.genres.filter((genre) => genre !== value)
-      : [...movie.genres, value];
-    setMovie({ ...movie, genres: updatedGenres });
+    const { value, checked } = e.target;
+    if (checked) {
+      setMovie({ ...movie, genres: [...movie.genres, value] });
+    } else {
+      setMovie({ ...movie, genres: movie.genres.filter((genre) => genre !== value) });
+    }
   };
 
   const handleSave = () => {
@@ -35,20 +50,32 @@ const AddMovie = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log('Movie saved:', data);
+        // Show success message to the user
+        setSuccessMessage('Movie saved successfully!');
         // Reset the form
         setMovie({
           name: '',
           image: '',
           release_date: '',
           description: '',
+          genres: [],
         });
+        // Clear the success message after a few seconds (e.g., 5 seconds)
+        setTimeout(() => setSuccessMessage(''), 5000);
       })
-      .catch((error) => console.error('Error saving movie:', error));
+      .catch((error) => {
+        console.error('Error saving movie:', error);
+        // Show an error message to the user if saving fails
+        setErrorMessage('Error saving the movie. Please try again.');
+      });
   };
+  
 
   return (
     <div className="container">
       <h1>Add a Movie</h1>
+      {successMessage && <p className="success-message">{successMessage}</p>}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
       <form>
         <div className="form-group">
           <label htmlFor="name">Movie Name:</label>
@@ -65,8 +92,8 @@ const AddMovie = () => {
           <input
             type="date"
             id="releaseDate"
-            name="releaseDate"
-            value={movie.releaseDate}
+            name="release_date" // Correct the name attribute
+            value={movie.release_date}
             onChange={handleInputChange}
           />
         </div>
@@ -92,56 +119,18 @@ const AddMovie = () => {
         </div>
         <div className="form-group">
           <label>Genres:</label>
-          <label>
-            <input
-              type="checkbox"
-              name="genre"
-              value="Action"
-              checked={movie.genres.includes('Action')}
-              onChange={handleGenreChange}
-            />{' '}
-            Action
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="genre"
-              value="Comedy"
-              checked={movie.genres.includes('Comedy')}
-              onChange={handleGenreChange}
-            />{' '}
-            Comedy
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="genre"
-              value="Drama"
-              checked={movie.genres.includes('Drama')}
-              onChange={handleGenreChange}
-            />{' '}
-            Drama
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="genre"
-              value="Sci-Fi"
-              checked={movie.genres.includes('Sci-Fi')}
-              onChange={handleGenreChange}
-            />{' '}
-            Sci-Fi
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="genre"
-              value="Horror"
-              checked={movie.genres.includes('Horror')}
-              onChange={handleGenreChange}
-            />{' '}
-            Horror
-          </label>
+          {availableGenres.map((genre) => (
+            <label key={genre.id}>
+              <input
+                type="checkbox"
+                name="genre"
+                value={genre.name}
+                checked={movie.genres.includes(genre.name)}
+                onChange={handleGenreChange}
+              />{' '}
+              {genre.name}
+            </label>
+          ))}
         </div>
         <div className="form-group">
           <button type="button" onClick={handleSave}>

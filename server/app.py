@@ -4,20 +4,29 @@ from flask import Flask, jsonify, request, make_response
 from models import db, Movie, Rating, User, Genre
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
-from flask import Flask
+from datetime import datetime
 from flask_cors import CORS
+
+from models import db, Movie, Rating, User, Genre
+from werkzeug.security import generate_password_hash, check_password_hash
+import jwt
+import os
+from functools import wraps
 
 app = Flask(__name__)
 cors = CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Movies.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'said8354' 
 app.json.compact = False
 
+CORS(app)
 migrate = Migrate(app, db)
 db.init_app(app)
 
 api = Api(app)
+
 
 class Movies(Resource):
 
@@ -27,11 +36,19 @@ class Movies(Resource):
 
     def post(self):
         data = request.get_json()
+        # Handle release_date
+        release_date_str = data.get('release_date')
+        if release_date_str:
+            # Convert the date string to a Python date object
+            release_date = datetime.strptime(release_date_str, '%Y-%m-%d').date()
+        else:
+            release_date = None  # Set to None if no date provided
+
 
         new_Movie = Movie(
             name=data['name'],
             image=data['image'],
-            release_date=data['release_date'],
+            release_date=release_date,
             description=data['description'],
         )
 
@@ -171,7 +188,9 @@ class Genres(Resource):
 
 api.add_resource(Genres, '/Genres')
 
-
+api.add_resource(Register, '/register')
+api.add_resource(Login, '/login')
+api.add_resource(Protected, '/protected')
 
 if __name__ == '__main__':
     app.run(port=3002, debug=True)

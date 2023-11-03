@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-function Login() {
-  const navigate = useNavigate();
-  const [userData, setUserData] = useState({ email: '', password: '' });
+
+function Signup() {
+    const navigate = useNavigate();
+  const [userData, setUserData] = useState({ email: '', username: '', password: '' });
   const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
@@ -15,7 +16,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch('/login', {
+      const response = await fetch('/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -25,22 +26,21 @@ function Login() {
 
       const data = await response.json();
 
-      if (response.status === 200) {
-        // Assuming the server returns a JWT token upon successful login
-        localStorage.setItem('token', data.token);
-        navigate('/protected'); // Navigate to the protected route
+      if (response.status === 201) {
+        setMessage(`Registration successful for ${data.username}. You can now log in.`);
+        navigate('/login');
       } else {
         setMessage(data.message);
       }
     } catch (error) {
-      console.error('Error during login:', error);
-      setMessage('Login failed. Please try again later.');
+      console.error('Error during registration:', error);
+      setMessage('Registration failed. Please try again later.');
     }
   };
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Email:
@@ -48,18 +48,23 @@ function Login() {
         </label>
         <br />
         <label>
+          Username:
+          <input type="text" name="username" value={userData.username} onChange={handleChange} required />
+        </label>
+        <br />
+        <label>
           Password:
           <input type="password" name="password" value={userData.password} onChange={handleChange} required />
         </label>
         <br />
-        <button type="submit">Log In</button>
+        <button type="submit">Register</button>
       </form>
       {message && <p>{message}</p>}
       <p>
-        No account? <Link to="/signup">Create account</Link>
+        Already have an account? <Link to="/login">Login</Link>
       </p>
     </div>
   );
 }
 
-export default Login;
+export default Signup;

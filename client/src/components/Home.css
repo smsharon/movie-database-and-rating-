@@ -39,9 +39,9 @@ header {
   
   /* Style the movie posters */
   .featured-movies .movie-posters {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
   }
   
   .featured-movies .movie-poster {
@@ -77,9 +77,9 @@ header {
   
   /* Style the movie posters */
 .top-rated-movies .movie-posters {
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
   }
   
   .top-rated-movies .movie-poster {
@@ -167,15 +167,21 @@ h2 {
 }
 
 .filters select, .filters input, .filters button {
-  padding: 10px;
-  border: 1px solid #ccc;
+  padding: 8px 16px;
+  border: none;
   border-radius: 5px;
   font-size: 16px;
+  
 }
 
 .filters select {
   width: 200px;
 }
+.input {
+  display: flex;
+
+}
+
 
 .filters input {
   flex: 1;
@@ -279,4 +285,97 @@ h2 {
 .submit-button:hover {
   background-color: #0056b3;
 }
+
+.container {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.form-group label:first-child {
+  margin-top: 0;
+}
+
+.form-group label input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button#cancel {
+  background-color: #ccc;
+}
+.navbar {
+  background-color: #333;
+  padding: 10px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.nav-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.nav-item {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.nav-item a:hover {
+  color: #ffcc00;
+}
+
 

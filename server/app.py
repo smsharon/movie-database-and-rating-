@@ -44,7 +44,7 @@ class Register(Resource):
 
         return {'message': 'Registration successful'}, 201
 
-# User login
+# User log
 class Login(Resource):
     def post(self):
         data = request.get_json()

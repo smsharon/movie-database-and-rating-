@@ -6,6 +6,8 @@ import AddMovie from './AddMovie';
 import Navbar from './Navbar';
 import Login from './Login';
 import Signup from './Signup';
+import Logout from './Logout';
+
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
           <Route path="/addMovie" element={<AddMovie />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/logout" element={<Logout />} />
         </Routes>
       </Router> 
       

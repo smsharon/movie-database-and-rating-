@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import './Signup.css';
+
 
 function Signup() {
     const navigate = useNavigate();
@@ -39,7 +41,7 @@ function Signup() {
   };
 
   return (
-    <div>
+    <div className="signup-container">
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <label>

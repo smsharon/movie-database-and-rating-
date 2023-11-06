@@ -160,13 +160,12 @@ class MovieByID(Resource):
 
 api.add_resource(MovieByID, '/Movies/<int:id>')
 
-#ratings endpoint
 class Ratings(Resource):
     @token_required
-
     def get(self):
-        Ratings = [Rating.to_dict() for Rating in Rating.query.all()]
+        Ratings = [rating.to_dict() for rating in Rating.query.all()]
         return make_response(jsonify(Ratings), 200)
+    
     @token_required
     def post(self, current_user):
         data = request.get_json()
@@ -174,15 +173,16 @@ class Ratings(Resource):
         new_Rating = Rating(
             rating=data['rating'],
             review=data['review'],
-            user_id=current_user.id,  # Attach the user ID to the rating
-            movie_id=data['movie_id']  # You should also include the movie ID
+            user_id=current_user.id,
+            movie_id=data.get('movie_id')  # Include the movie ID
         )
 
         db.session.add(new_Rating)
         db.session.commit()
 
+        # Return the new rating as a dictionary
         return make_response(new_Rating.to_dict(), 201)
-api.add_resource(Ratings, '/Ratings')
+
 
 
 class RatingByID(Resource):

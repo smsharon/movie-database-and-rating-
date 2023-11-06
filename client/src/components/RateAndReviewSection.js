@@ -1,41 +1,50 @@
 import React, { useState } from 'react';
-import './Home.css';
+//import './RateAndReviewSection.css';
 
 const RateAndReviewSection = () => {
-  // State variables
+  const userToken = localStorage.getItem('token'); // Retrieve the user token from localStorage
+
   const [rating, setRating] = useState(0); // Initialize with 0 stars
   const [review, setReview] = useState('');
+  const [message, setMessage] = useState('');
 
-  // Function to handle the rating change
   const handleRatingChange = (newRating) => {
     setRating(newRating);
   };
 
-  // Function to handle the review text change
   const handleReviewChange = (event) => {
     setReview(event.target.value);
   };
 
-  // Function to handle form submission
   const handleSubmit = () => {
-    
+    if (!userToken) {
+      setMessage('Please log in to submit a rating and review.');
+      return;
+    }
+
     fetch('/Ratings', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${userToken}`,
       },
       body: JSON.stringify({ rating, review }),
     })
       .then((response) => response.json())
       .then((data) => {
-        // Handle the response from the backend
-        console.log('Rating and Review submitted successfully:', data);
+        if (data.status === 201) {
+          console.log('Rating and Review submitted successfully:', data);
+          setMessage('Rating and Review submitted successfully.');
+        } else {
+          console.error('Error submitting Rating and Review:', data);
+          setMessage('Error submitting Rating and Review.');
+        }
       })
       .catch((error) => {
-        console.error('Error submitting Rating and Review:', error);
+        console.error('Error during fetch:', error);
+        setMessage('Error submitting Rating and Review.');
       });
 
-    // Clear the review text and reset the rating
     setReview('');
     setRating(0);
   };
@@ -68,6 +77,7 @@ const RateAndReviewSection = () => {
         />
       </div>
       <button onClick={handleSubmit}>Submit</button>
+      {message && <p>{message}</p>}
     </div>
   );
 };

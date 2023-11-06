@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from flask import Flask, jsonify, request, make_response
+from flask import Flask, jsonify, request, make_response, Response
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 from datetime import datetime
@@ -162,25 +162,26 @@ api.add_resource(MovieByID, '/Movies/<int:id>')
 
 #ratings endpoint
 class Ratings(Resource):
+    @token_required
 
     def get(self):
         Ratings = [Rating.to_dict() for Rating in Rating.query.all()]
         return make_response(jsonify(Ratings), 200)
-
-    def post(self):
+    @token_required
+    def post(self, current_user):
         data = request.get_json()
 
         new_Rating = Rating(
             rating=data['rating'],
             review=data['review'],
+            user_id=current_user.id,  # Attach the user ID to the rating
+            movie_id=data['movie_id']  # You should also include the movie ID
         )
 
         db.session.add(new_Rating)
         db.session.commit()
 
         return make_response(new_Rating.to_dict(), 201)
-
-
 api.add_resource(Ratings, '/Ratings')
 
 

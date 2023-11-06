@@ -2,13 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Logout.css';
 
-function Logout() {
+function Logout({ setIsLoggedIn }) {
   const navigate = useNavigate();
 
   // Handle logout: remove the token from localStorage
   const handleLogout = () => {
     localStorage.removeItem('token');
-    navigate('/login'); // Redirect to the login page or any other page as needed
+    setIsLoggedIn(false);
+    navigate('/'); // Redirect to the login page or any other page as needed
   };
 
   return (

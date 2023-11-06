@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Link } from 'react-router-dom';
 import './Login.css';
 
-function Login() {
+function Login({ setIsLoggedIn }) {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
@@ -30,6 +30,7 @@ function Login() {
       if (response.status === 200) {
         // Assuming the server returns a JWT token upon successful login
         localStorage.setItem('token', data.token);
+        setIsLoggedIn(true);
         navigate('/'); // Navigate to the protected route
       } else {
         setMessage(data.message);

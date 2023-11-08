@@ -41,17 +41,19 @@ header {
   .featured-movies .movie-posters {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    gap: 80px;
+    border-radius: 8px;
+    margin: 10px;
   }
   
-  .featured-movies .movie-poster {
-    width: 200px; 
+  /*.featured-movies .movie-poster {
+    width: 400px; 
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     margin: 10px;
     transition: transform 0.2s;
     display: flex;
-  }
+  }*/
   
   .featured-movies .movie-poster:hover {
     transform: scale(1.05);
@@ -79,16 +81,18 @@ header {
 .top-rated-movies .movie-posters {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  gap: 80px;
+  border-radius: 8px;
+  margin: 10px;
   }
   
-  .top-rated-movies .movie-poster {
+  /*.top-rated-movies .movie-poster {
     width: 200px; 
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
+    border-radius: 10px;
     margin: 10px;
     transition: transform 0.2s;
-  }
+  }*/
   
   .top-rated-movies .movie-poster:hover {
     transform: scale(1.05);

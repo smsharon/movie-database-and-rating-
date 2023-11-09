@@ -48,8 +48,16 @@ const Movie = () => {
     setMovies(searchResults);
   };
 
-  const sortedMovies = movies.slice(); // Create a copy of the movies array
+  // Filter movies based on selected genre
+  const filteredMovies = movies.filter((movie) => {
+    if (selectedGenre === '') {
+      return true; // Show all movies if no genre is selected
+    }
+    return movie.genres.some((genre) => genre.id.toString() === selectedGenre);
+  });
 
+  // Sort movies based on the selected sort option
+  const sortedMovies = filteredMovies.slice();
   if (sortOption === 'name') {
     sortedMovies.sort((a, b) => a.name.localeCompare(b.name));
     console.log(sortedMovies);

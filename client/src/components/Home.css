@@ -1,51 +1,72 @@
 /* HomePage.css */
-
-/* Header */
-header {
-    background-color: #333;
-    color: white;
-    padding: 10px;
+  
+  .navbar {
+    background-color: #821d1d;
+    height: 100px;
+    width: 100%;
+    padding: 30px;
+    text-align: center;
   }
   
-  nav ul {
+  .nav-list {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     list-style-type: none;
-    display: flex;
-    justify-content: space-around;
+    padding: 0;
+
   }
   
+  .nav-item {
+    margin-right: 20px;
+    display: inline-block;
+    line-height: 50px;
+  }
+  
+  .nav-item a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 23px;
+    
+  }
+  
+  .nav-item a:hover {
+    color: #ffcc00;
+  }
+   
   nav li {
     cursor: pointer;
   }
   
   /* Welcome Banner */
-  .welcome-banner {
-    text-align: center;
-    background-color: #444;
-    padding: 20px;
+  .logo {
+    line-height: 80px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+    font-weight: bold;
+    color: white;
+    font-size: 31px;
   }
   
-  .welcome-banner h2 {
-    font-size: 24px;
-    color: white;
-  }
   
   /* Featured Movies */
   /* Center-align the title */
 .featured-movies h3 {
     text-align: center;
-    font-size: 24px;
+    font-size: 31px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
     margin-top: 20px;
   }
   
   /* Style the movie posters */
   .featured-movies .movie-posters {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    align-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 7%;
   }
   
   .featured-movies .movie-poster {
-    width: 200px; 
+    width: 400px; 
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     margin: 10px;
@@ -71,15 +92,17 @@ header {
   /* Top Rated Movies */
   .top-rated-movies h3 {
     text-align: center;
-    font-size: 24px;
+    font-size: 31px;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin-top: 20px;
   }
   
   /* Style the movie posters */
 .top-rated-movies .movie-posters {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 7%;
   }
   
   .top-rated-movies .movie-poster {
@@ -96,11 +119,11 @@ header {
   }
   
   .movie-poster {
-    flex: 0 0 20%;
+    flex: 0 0 2;
   }
   
   .movie-poster img {
-    width: 100%;
+    width: 160%;
     height: auto;
   }
   
@@ -108,6 +131,9 @@ header {
   
 .recent-user-reviews {
   padding: 20px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+  font-size: 31px;
 }
 
 .recent-user-reviews h3 {
@@ -191,14 +217,14 @@ h2 {
 }
 
 .filters button {
-  background-color: #007BFF;
+  background-color: #821d1d;
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .filters button:hover {
-  background-color: #0056b3;
+  background-color: #821d1d;
 }
 
 .thumbnails {
@@ -233,7 +259,7 @@ h2 {
 }
 
 .next-page-button {
-  background-color: #007BFF;
+  background-color: #821d1d;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -244,7 +270,7 @@ h2 {
 }
 
 .next-page-button:hover {
-  background-color: #0056b3;
+  background-color: #821d1d;
 }
 .rate-and-review-section {
   background-color: #f8f8f8;
@@ -275,7 +301,7 @@ h2 {
 }
 
 .submit-button {
-  background-color: #007bff;
+  background-color: #821d1d;
   color: white;
   padding: 8px 16px;
   border: none;
@@ -285,7 +311,7 @@ h2 {
 }
 
 .submit-button:hover {
-  background-color: #0056b3;
+  background-color: #821d1d;
 }
 
 .container {
@@ -339,7 +365,7 @@ textarea {
 }
 
 button {
-  background-color: #007bff;
+  background-color: #821d1d;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -352,32 +378,14 @@ button {
 button#cancel {
   background-color: #ccc;
 }
-.navbar {
-  background-color: #333;
-  padding: 10px;
-  text-align: center;
-  font-size: 24px;
+
+@media only screen and (max-width: 600px) {
+  .navbar {
+    height: 80px;
+    padding: 20px;
+  }
+
 }
 
-.nav-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.nav-item {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-.nav-item a {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.nav-item a:hover {
-  color: #ffcc00;
-}
 
 

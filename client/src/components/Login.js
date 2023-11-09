@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Link } from 'react-router-dom';
-function Login() {
+import './Login.css';
+
+function Login({ setIsLoggedIn }) {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
@@ -28,7 +30,8 @@ function Login() {
       if (response.status === 200) {
         // Assuming the server returns a JWT token upon successful login
         localStorage.setItem('token', data.token);
-        navigate('/protected'); // Navigate to the protected route
+        setIsLoggedIn(true);
+        navigate('/'); // Navigate to the protected route
       } else {
         setMessage(data.message);
       }
@@ -39,7 +42,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <label>

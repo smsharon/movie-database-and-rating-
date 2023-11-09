@@ -30,12 +30,6 @@ const Home = () => {
 
   return (
     <div className="home">
-      
-
-      <div className="welcome-banner">
-        <h2>Discover the Best Movies</h2>
-      </div>
-
       <div className="featured-movies">
       <h3 className="text-center">Featured Movies</h3>
       <div className="movie-posters">
